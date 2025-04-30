@@ -60,7 +60,7 @@ const EventCard = ({ event, onToggleFavorite }) => {
           <span className="px-3 py-1 bg-gray-100 text-gray-800 text-xs font-medium rounded-full">
             {event.category}
           </span>
-          <button className="px-4 py-2 bg-indigo-600 text-white rounded-lg text-sm hover:bg-indigo-700 transition shadow-md">
+          <button  onClick={() => alert(`Tickets for "${event.title}" coming soon!`)} className="px-4 py-2 bg-indigo-600 text-white rounded-lg text-sm hover:bg-indigo-700 transition shadow-md">
             Get Tickets
           </button>
         </div>

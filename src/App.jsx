@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react';
-import { FiSearch, FiHeart, FiClock, FiUsers, FiCalendar, FiMapPin, FiInfo } from 'react-icons/fi';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import EventCard from './components/EventCard';
@@ -9,7 +8,7 @@ const App = () => {
   const [loading, setLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('All');
-  const [activeTab, setActiveTab] = useState('events'); // 'events' or 'about'
+  const [activeTab, setActiveTab] = useState('events');
 
   const categories = ["All", "Music", "Art", "Food", "Tech", "Wellness", "Comedy"];
 
@@ -23,7 +22,7 @@ const App = () => {
         location: "Central Park",
         category: "Music",
         price: 25,
-        image: "https://images.unsplash.com/photo-1501281668745-f7f57925c3b4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80",
+        image: "https://images.unsplash.com/photo-1501281668745-f7f57925c3b4?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80",
         isFavorite: false,
         attendees: 1250,
         duration: "4 hours"
@@ -114,7 +113,7 @@ const App = () => {
         location: "Nairobi Theatre",
         category: "Comedy",
         price: 15,
-        image: "https://i.ytimg.com/vi/5pC1SvCoIVE/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLD895KLTL4UINo4ATUe_WAipHVgQw",
+        image: "https://i.ytimg.com/vi/5pC1SvCoIVE/hq720.jpg",
         isFavorite: false,
         attendees: 500,
         duration: "2 hours"
@@ -131,48 +130,7 @@ const App = () => {
         isFavorite: false,
         attendees: 500,
         duration: "4 hours"
-      },
-      {
-        id: 4,
-        title: "Nairobi Street Food",
-        date: "2023-07-15",
-        time: "14:00",
-        location: "Jamhuri Park",
-        category: "Food",
-        price: 10,
-        image: "https://storage.googleapis.com/m_tickets/assets/event_poster/nairobi-street-food-festival-2023-08-17T13-02-15.922916.jpeg",
-        isFavorite: false,
-        attendees: 1050,
-        duration: "3 hours"
-      },
-      {
-        id: 5,
-        title: "Health and Wellness",
-        date: "2024-01-15",
-        time: "10:00",
-        location: "Arboretum",
-        category: "Wellness",
-        price: 5,
-        image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTU-jstk15F0jYTpbJVSl_USYI6qy6JG8Z0iw&s",
-        isFavorite: false,
-        attendees: 1250,
-        duration: "4 hours"
-      },
-      {
-        id: 6,
-        title: "Tech Expo",
-        date: "2024-03-11",
-        time: "11:00",
-        location: "KICC",
-        category: "Tech",
-        price: 17,
-        image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQykp__wcmSSxunMVKNXde1G7edqWAWgWd56Q&s",
-        isFavorite: false,
-        attendees: 1250,
-        duration: "6 hours"
-      },
-      
-      // Add more mock events here
+      }
     ];
 
     setTimeout(() => {
@@ -182,23 +140,23 @@ const App = () => {
   }, []);
 
   const toggleFavorite = (id) => {
-    setEvents(events.map(event => 
+    setEvents(events.map(event =>
       event.id === id ? { ...event, isFavorite: !event.isFavorite } : event
     ));
   };
 
   const filteredEvents = events.filter(event => {
-    const matchesSearch = event.title.toLowerCase().includes(searchTerm.toLowerCase()) || 
-                         event.location.toLowerCase().includes(searchTerm.toLowerCase());
+    const matchesSearch = event.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      event.location.toLowerCase().includes(searchTerm.toLowerCase());
     const matchesCategory = selectedCategory === "All" || event.category === selectedCategory;
     return matchesSearch && matchesCategory;
   });
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-50 to-gray-100">
-      <Header 
-        searchTerm={searchTerm} 
-        setSearchTerm={setSearchTerm} 
+      <Header
+        searchTerm={searchTerm}
+        setSearchTerm={setSearchTerm}
         activeTab={activeTab}
         setActiveTab={setActiveTab}
       />
@@ -211,25 +169,22 @@ const App = () => {
               <p className="text-gray-600">Find the best happenings in your city</p>
             </div>
 
-            {/* Category Slider */}
             <div className="mb-10">
               <h3 className="text-2xl font-semibold text-center mb-4">Event Categories</h3>
-              <div className="relative">
-                <div className="flex overflow-x-auto space-x-4 pb-4">
-                  {categories.map((category, index) => (
-                    <button
-                      key={index}
-                      onClick={() => setSelectedCategory(category)}
-                      className={`px-6 py-3 bg-white rounded-lg shadow-md transition-all ${
-                        selectedCategory === category 
-                          ? 'bg-indigo-600 text-white' 
-                          : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-                      }`}
-                    >
-                      {category}
-                    </button>
-                  ))}
-                </div>
+              <div className="flex overflow-x-auto space-x-4 pb-4">
+                {categories.map((category, index) => (
+                  <button
+                    key={index}
+                    onClick={() => setSelectedCategory(category)}
+                    className={`px-6 py-3 rounded-lg shadow-md transition-all ${
+                      selectedCategory === category
+                        ? 'bg-indigo-600 text-white'
+                        : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                    }`}
+                  >
+                    {category}
+                  </button>
+                ))}
               </div>
             </div>
 
@@ -245,10 +200,10 @@ const App = () => {
             ) : (
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
                 {filteredEvents.map(event => (
-                  <EventCard 
-                    key={event.id} 
-                    event={event} 
-                    onToggleFavorite={toggleFavorite} 
+                  <EventCard
+                    key={event.id}
+                    event={event}
+                    onToggleFavorite={toggleFavorite}
                   />
                 ))}
               </div>
@@ -264,36 +219,30 @@ const App = () => {
   );
 };
 
-const AboutSection = () => {
-  return (
-    <div className="max-w-4xl mx-auto py-12">
-      <div className="text-center mb-12">
-        <h2 className="text-4xl font-bold text-gray-800 mb-4">About LocalEventFinder</h2>
-        <div className="w-24 h-1 bg-indigo-600 mx-auto"></div>
-      </div>
-
-      {/* About Content */}
-      <div className="bg-white rounded-xl shadow-lg overflow-hidden mb-12">
-        <div className="md:flex">
-          <div className="md:w-1/2 p-8">
-            <h3 className="text-2xl font-bold text-gray-800 mb-4">Our Story</h3>
-            <p className="text-gray-600 mb-4">
-              Founded in 2023, LocalEventFinder was born out of a passion for connecting communities through shared experiences. 
-              We noticed how hard it was to find all the great local events happening around town, so we built a platform 
-              that makes discovery effortless.
-            </p>
-          </div>
-          <div className="md:w-1/2">
-            <img 
-              src="https://images.unsplash.com/photo-1521737711867-e3b97375f902?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" 
-              alt="Team working together" 
-              className="w-full h-full object-cover"
-            />
-          </div>
+const AboutSection = () => (
+  <div className="max-w-4xl mx-auto py-12">
+    <div className="text-center mb-12">
+      <h2 className="text-4xl font-bold text-gray-800 mb-4">About LocalEventFinder</h2>
+      <div className="w-24 h-1 bg-indigo-600 mx-auto"></div>
+    </div>
+    <div className="bg-white rounded-xl shadow-lg overflow-hidden mb-12">
+      <div className="md:flex">
+        <div className="md:w-1/2 p-8">
+          <h3 className="text-2xl font-bold text-gray-800 mb-4">Our Story</h3>
+          <p className="text-gray-600 mb-4">
+          Our Local Event Finder platform is designed to connect people with the best events happening around them. Whether you're into music, tech, sports, food, or community meetups, our goal is to make discovering local experiences easy and personalized. With smart search, event categories, location-based recommendations, and social login, we bring everything you need into one simple, user-friendly platform. Never miss out on what’s happening near you — explore, attend, and enjoy!
+          </p>
+        </div>
+        <div className="md:w-1/2">
+          <img
+            src="https://images.unsplash.com/photo-1521737711867-e3b97375f902?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80"
+            alt="Team working together"
+            className="w-full h-full object-cover"
+          />
         </div>
       </div>
     </div>
-  );
-};
+  </div>
+);
 
 export default App;
